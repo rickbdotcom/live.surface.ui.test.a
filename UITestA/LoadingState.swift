@@ -10,32 +10,13 @@ import Foundation
 
 class LoadingState: ObservableObject {
 
-	@Published var error: Error? = nil {
-		didSet {
-			isFinished = error != nil ? true : progress.isFinished
-		}
+	enum State {
+		case idle
+		case loading
+		case success
+		case failure(Error)
 	}
-	@Published private(set) var isFinished: Bool = false
+	@Published var state: State = .idle
 
-	var progress = Progress() {
-		didSet {
-			observeProgress()
-		}
-	}
-
-	private var observer: NSKeyValueObservation!
-
-	init() {
-		observeProgress()
-	}
-
-	private func observeProgress() {
-		observer = progress.observe(\.isFinished, options: [.initial, .old, .new]) { [weak self] progress, value in
-			DispatchQueue.main.async {
-				if self?.error == nil {
-					self?.isFinished = value.newValue ?? false
-				}
-			}
-		}
-	}
+	var progress = Progress()
 }

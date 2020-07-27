@@ -8,26 +8,42 @@
 
 import SwiftUI
 
-struct LoadingStateView<Content: View>: View {
+struct LoadingStateView<Content: View, P: View, E: View>: View {
 
 	@ObservedObject var loadingState: LoadingState
 
-	var content:  Content
+	var content: Content
+	var progress: (Progress) -> P
+	var error: (Error) -> E
 
     var body: some View {
-        if let error = loadingState.error {
-			return error.localizedDescription.text.any
-		} else if loadingState.progress.isFinished {
+		switch loadingState.state {
+		case let .failure(loadingError):
+			return error(loadingError).any
+		case .success:
 			return content.any
-		} else {
-			return ProgressView(progress: loadingState.progress).any
+		default:
+			return progress(loadingState.progress).any
 		}
     }
 }
 
 extension View {
 
-	func loading(with loadingState: LoadingState) -> LoadingStateView<Self> {
-		LoadingStateView(loadingState: loadingState, content: self)
+	func loading<P: View, E: View>(
+		with loadingState: LoadingState,
+		progress: @escaping (Progress) -> P,
+		error: @escaping (Error) -> E
+	) -> LoadingStateView<Self, P, E> {
+		LoadingStateView(loadingState: loadingState, content: self, progress: progress, error: error)
+	}
+
+	func defaultLoading(with loadingState: LoadingState) -> AnyView {
+		LoadingStateView(
+			loadingState: loadingState,
+			content: self,
+			progress: { ProgressView(progress: $0) },
+			error: { $0.localizedDescription.text }
+		).any
 	}
 }

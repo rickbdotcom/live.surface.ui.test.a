@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import UIKit
 
 extension View {
 
@@ -20,5 +21,12 @@ extension String {
 
 	var text: Text {
 		Text(self)
+	}
+}
+
+extension UIImage {
+
+	 var image: Image {
+		Image(uiImage: self)
 	}
 }

@@ -24,6 +24,7 @@
 		0D71E08524CE6E6D00A1C7D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D71E08424CE6E6D00A1C7D5 /* Preview Assets.xcassets */; };
 		0D71E08824CE6E6D00A1C7D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D71E08624CE6E6D00A1C7D5 /* LaunchScreen.storyboard */; };
 		0D71E09124CE6FD600A1C7D5 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D71E09024CE6FD600A1C7D5 /* GridView.swift */; };
+		0DF14EF024CF41BA00C8821D /* LiveSurfaceImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF14EEF24CF41BA00C8821D /* LiveSurfaceImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		0D71E08924CE6E6D00A1C7D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D71E08F24CE6E7F00A1C7D5 /* UITestA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UITestA.entitlements; sourceTree = "<group>"; };
 		0D71E09024CE6FD600A1C7D5 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		0DF14EEF24CF41BA00C8821D /* LiveSurfaceImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSurfaceImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,15 +83,16 @@
 			children = (
 				0D71E07B24CE6E6C00A1C7D5 /* AppDelegate.swift */,
 				0D71E07D24CE6E6C00A1C7D5 /* SceneDelegate.swift */,
+				0D71E07F24CE6E6C00A1C7D5 /* ContentView.swift */,
 				0D64A5B924CE826900AFB043 /* ImageService.swift */,
 				0D64A5BD24CE96CF00AFB043 /* ObservableArray.swift */,
 				0D64A5BF24CE96E400AFB043 /* LiveSurfaceImage.swift */,
+				0DF14EEF24CF41BA00C8821D /* LiveSurfaceImageView.swift */,
 				0D64A5C124CE970C00AFB043 /* LoadingState.swift */,
 				0D64A5C924CEFDAE00AFB043 /* LoadingStateView.swift */,
 				0D64A5CF24CEFFA000AFB043 /* ProgressView.swift */,
 				0D64A5BB24CE83AC00AFB043 /* ImageManifest.swift */,
 				0D64A5C324CE9F6800AFB043 /* URLSession.swift */,
-				0D71E07F24CE6E6C00A1C7D5 /* ContentView.swift */,
 				0D71E09024CE6FD600A1C7D5 /* GridView.swift */,
 				0D64A5C524CEA0CA00AFB043 /* Publisher.swift */,
 				0D64A5CD24CEFF4C00AFB043 /* SwiftUI.swift */,
@@ -182,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D64A5BC24CE83AC00AFB043 /* ImageManifest.swift in Sources */,
+				0DF14EF024CF41BA00C8821D /* LiveSurfaceImageView.swift in Sources */,
 				0D71E07C24CE6E6C00A1C7D5 /* AppDelegate.swift in Sources */,
 				0D64A5C424CE9F6800AFB043 /* URLSession.swift in Sources */,
 				0D64A5CA24CEFDAE00AFB043 /* LoadingStateView.swift in Sources */,

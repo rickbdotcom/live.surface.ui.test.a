@@ -14,34 +14,37 @@ struct ContentView: View {
 
 	@ObservedObject var images: ObservableArray<LiveSurfaceImage>
 
-	@State private var cellWidth: CGFloat = 0.5
-	@State private var cellHeight: CGFloat = 0.5
+	@State private var cellWidth: CGFloat = 0.25
+	@State private var cellHeight: CGFloat = 0.25
 
     var body: some View {
 		HStack {
 			VStack {
 				GeometryReader { g in
 					GridView(numberOfColumns: self.numberOfColumns(), rowHeight: self.rowHeight(from: g.size.height), data: self.images.items) {
-						Text($0.id)
+						self.view(for: $0)
 					}
 				}
 				self.cellWidthSlider
 			}
 			self.cellHeightSlider
 		}
-		.loading(with: self.imageService.loadingState)
+		.defaultLoading(with: self.imageService.loadingState)
 	}
 }
 
 private extension ContentView {
 
+	func view(for image: LiveSurfaceImage) -> some View {
+		LiveSurfaceImageView(image: image)
+	}
 
 	func numberOfColumns() -> Int {
 		Int(min(5, max(1, 1 / cellWidth)))
 	}
 
 	func rowHeight(from height: CGFloat) -> CGFloat {
-		height * cellHeight
+		max(128, height * cellHeight)
 	}
 
 	var cellWidthSlider: some View {

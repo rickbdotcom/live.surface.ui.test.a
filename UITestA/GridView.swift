@@ -9,6 +9,8 @@
 import SwiftUI
 
 // in iOS 14 we'd just use the new lazy grid view
+// this is buggy when changing the number of columns
+// some SwiftUI identifiable/animation voodoo
 struct GridView<Cell: View, Data: Identifiable>: View {
 
 	let numberOfColumns: Int
@@ -18,8 +20,8 @@ struct GridView<Cell: View, Data: Identifiable>: View {
 	let cell: (Data) -> Cell
 
 	private var rows: [DataRow] {
-		data.chunked(into: numberOfColumns).map {
-			DataRow(columns: $0)
+		data.chunked(into: numberOfColumns).enumerated().map { i, columns in
+			DataRow(columns: columns, id: i)
 		}
 	}
 
@@ -32,7 +34,6 @@ struct GridView<Cell: View, Data: Identifiable>: View {
 							self.cell($0)
 								.frame(maxWidth: .infinity, maxHeight: .infinity)
 								.frame(width: geom.size.width / CGFloat(self.numberOfColumns), height: self.rowHeight)
-								.background(Color.red)
 						}
 					}.listRowInsets(EdgeInsets())
 				}
@@ -41,23 +42,12 @@ struct GridView<Cell: View, Data: Identifiable>: View {
 	}
 
 	struct DataRow: Identifiable {
-		let id: Hash
+		let id: Int
 		let columns: [Data]
 
-		init(columns: [Data]) {
+		init(columns: [Data], id: Int) {
 			self.columns = columns
-			id = Hash(ids: columns.map { $0.id} )
-		}
-		struct Hash: Hashable {
-			let ids: [Data.ID]
-
-			var hash: Int {
-				var hasher = Hasher()
-				ids.forEach {
-					hasher.combine($0)
-				}
-				return hasher.finalize()
-			}
+			self.id = id
 		}
 	}
 }
