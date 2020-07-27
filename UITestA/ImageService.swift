@@ -46,21 +46,46 @@ class ImageService: ObservableObject {
 // in a real app we could return image scaled to appropriate size
 	func image(named name: String, for size: CGSize, loadingState: LoadingState? = nil) -> AnyPublisher<UIImage, Error> {
 		if let image = cache.object(forKey: NSString(string: cacheKey(for: name, size: size))) {
+			loadingState?.state = .success
 			return Just(image).setFailureType(to: Error.self).eraseToAnyPublisher()
 		}
-		return sessionManager.imageTaskPublisher(url: url(for: name, size: size), loadingState: loadingState)
+
+		let localUrl = self.localUrl(for: name, size: size)
+		if FileManager.default.fileExists(atPath: localUrl.path) {
+			loadingState?.state = .success
+			return Just(UIImage(contentsOfFile: localUrl.path) ?? UIImage()).setFailureType(to: Error.self).eraseToAnyPublisher()
+		}
+
+		return sessionManager.dataTaskPublisher(for: url(for: name, size: size)) {
+			loadingState?.progress = $0
+		}.compactMap {
+			if let image = UIImage(data: $0.data) {
+				self.cache(data: $0.data, name: name, size: size)
+				return image
+			} else {
+				return nil
+			}
+		}
+		.mapError { $0 as Error }
+		.receive(on: RunLoop.main)
+		.loadingState(loadingState)
 	}
 }
 
 
 private extension ImageService {
 
+	func cache(data: Data, name: String, size: CGSize) {
+		let localUrl = self.localUrl(for: name, size: size)
+		try? data.write(to: localUrl)
+	}
+
 	func url(for name: String, size: CGSize) -> URL {
 		URL(string: name, relativeTo: baseImageURL)!
 	}
 
 	func localUrl(for name: String, size: CGSize) -> URL {
-		URL(fileURLWithPath: "")
+		FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appendingPathComponent(cacheKey(for: name, size: size))
 	}
 
 	func cacheKey(for name: String, size: CGSize) -> String {

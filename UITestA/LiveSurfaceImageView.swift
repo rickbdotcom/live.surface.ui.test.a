@@ -15,15 +15,14 @@ struct LiveSurfaceImageView: View {
 
 	var body: some View {
 		self.imageView
-		.defaultLoading(with: self.image.loadingState)
-		.onAppear {
-			self.image.image(for: .zero).sinkOnce {
-				self.uiImage = $0
+			.defaultLoading(with: self.image.loadingState)
+			.onAppear {
+				self.image.image(for: .zero).sinkOnce {
+					self.uiImage = $0
+				}
 			}
-		}
 	}
 }
-
 
 private extension LiveSurfaceImageView {
 

@@ -42,8 +42,15 @@ extension View {
 		LoadingStateView(
 			loadingState: loadingState,
 			content: self,
-			progress: { ProgressView(progress: $0) },
-			error: { $0.localizedDescription.text }
+			progress: { progress in
+				ZStack {
+					ProgressView(progress: progress)
+					ActivityIndicatorView().offset(x: 0, y: -32)
+				}.padding()
+			},
+			error: {
+				$0.localizedDescription.text.padding()
+			}
 		).any
 	}
 }

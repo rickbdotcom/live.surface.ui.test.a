@@ -15,6 +15,7 @@ extension URLSession {
 	func dataTaskPublisher(for url: URL, progress: ((Progress) -> Void)? = nil) -> URLSession.DataTaskPublisher {
 		let publisher = dataTaskPublisher(for: url)
 
+// theoretically this should work but haven't actually seen progress getting updated even with network link conditioner on
 		if let progress = progress {
 			DispatchQueue.main.async {
 				self.getAllTasks { tasks in
@@ -25,14 +26,6 @@ extension URLSession {
 			}
 		}
 		return publisher
-	}
-
-	func imageTaskPublisher(url: URL, loadingState: LoadingState? = nil) -> AnyPublisher<UIImage, Error> {
-		dataTaskPublisher(for: url) { loadingState?.progress = $0 }
-		.receive(on: RunLoop.main)
-		.compactMap { UIImage(data: $0.data) }
-		.mapError { $0 as Error }
-		.loadingState(loadingState)
 	}
 
 	func decodeableTaskPublisher<T: Decodable>(for url: URL, parameters: [String: String]? = nil, type: T.Type = T.self, progress: ((Progress) -> Void)? = nil) -> AnyPublisher<T, Error>  {
