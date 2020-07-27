@@ -51,6 +51,6 @@ private extension ImageEditView {
 			.background(Color.white)
 			.opacity(0.5)
 			.frame(width: g.size.width, alignment: .trailing)
-		}.zIndex(1)
+		}
 	}
 }

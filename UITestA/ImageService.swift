@@ -70,10 +70,30 @@ class ImageService: ObservableObject {
 		.receive(on: RunLoop.main)
 		.loadingState(loadingState)
 	}
+
+	func operations(for name: String) -> [ImageOperation] {
+		do {
+			let data = try Data(contentsOf: operationUrl(for: name))
+			return try JSONDecoder().decode([ImageOperation].self, from: data)
+		} catch {
+			return []
+		}
+	}
+
+	func save(operations: [ImageOperation], for name: String) {
+		do {
+			try JSONEncoder().encode(operations).write(to: operationUrl(for: name))
+		} catch {
+		}
+	}
 }
 
 
 private extension ImageService {
+
+	func operationUrl(for name: String) -> URL {
+		FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(name).appendingPathExtension("json")
+	}
 
 	func cache(data: Data, name: String, size: CGSize) {
 		let localUrl = self.localUrl(for: name, size: size)

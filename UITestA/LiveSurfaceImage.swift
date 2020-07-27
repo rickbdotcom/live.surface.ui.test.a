@@ -24,6 +24,7 @@ class LiveSurfaceImage: ObservableObject, Identifiable {
 		self.id = id
 		self.imageService = service
 		self.manifestImage = image
+		self.operations = service.operations(for: image.image)
 	}
 
 	func image(for size: CGSize) -> AnyPublisher<UIImage, Error> {
@@ -32,11 +33,13 @@ class LiveSurfaceImage: ObservableObject, Identifiable {
 
 	func apply(operation: ImageOperation) {
 		operations.append(operation)
+		imageService.save(operations: operations, for: manifestImage.image)
 	}
 
 	func undoOperation() {
 		if operations.isEmpty == false {
 			operations.removeLast()
+			imageService.save(operations: operations, for: manifestImage.image)
 		}
 	}
 }
