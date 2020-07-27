@@ -31,6 +31,7 @@ struct GridView<Cell: View, Data: Identifiable>: View {
 							self.cell($0)
 								.frame(maxWidth: .infinity, maxHeight: .infinity)
 								.frame(width: g.size.width / CGFloat(self.numberOfColumns), height: self.rowHeight)
+								.clipped()
 						}
 					}.listRowInsets(EdgeInsets())
 				}
