@@ -15,9 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
 		// Hacky thing to get rid of separator in list since we're using List to take advantage of lazy loading, in iOS 14 we'd just use lazy grid
-		UITableView.appearance(whenContainedInInstancesOf:
-			[UIHostingController<ContentView>.self]
-		).separatorStyle = .none
+		UITableView.appearance().separatorStyle = .none
 
 		imageService.initialize()
 		

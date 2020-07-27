@@ -12,6 +12,8 @@ import SwiftUI
 struct GridView<Cell: View, Data: Identifiable>: View {
 
 	let numberOfColumns: Int
+	let rowHeight: CGFloat
+
 	let data: [Data]
 	let cell: (Data) -> Cell
 
@@ -29,7 +31,7 @@ struct GridView<Cell: View, Data: Identifiable>: View {
 						ForEach(row.columns) {
 							self.cell($0)
 								.frame(maxWidth: .infinity, maxHeight: .infinity)
-								.frame(width: geom.size.width / 2.0)
+								.frame(width: geom.size.width / CGFloat(self.numberOfColumns), height: self.rowHeight)
 								.background(Color.red)
 						}
 					}.listRowInsets(EdgeInsets())

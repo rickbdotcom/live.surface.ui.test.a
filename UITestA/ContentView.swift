@@ -14,12 +14,54 @@ struct ContentView: View {
 
 	@ObservedObject var images: ObservableArray<LiveSurfaceImage>
 
+	@State private var cellWidth: CGFloat = 0.5
+	@State private var cellHeight: CGFloat = 0.5
+
     var body: some View {
-		GridView(numberOfColumns: 2, data:
-			images.items
-		) {
-			Text($0.id)
+		HStack {
+			VStack {
+				GeometryReader { g in
+					GridView(numberOfColumns: self.numberOfColumns(), rowHeight: self.rowHeight(from: g.size.height), data: self.images.items) {
+						Text($0.id)
+					}
+				}
+				self.cellWidthSlider
+			}
+			self.cellHeightSlider
 		}
-		.loading(with: imageService.loadingState)
+		.loading(with: self.imageService.loadingState)
+	}
+}
+
+private extension ContentView {
+
+
+	func numberOfColumns() -> Int {
+		Int(min(5, max(1, 1 / cellWidth)))
+	}
+
+	func rowHeight(from height: CGFloat) -> CGFloat {
+		height * cellHeight
+	}
+
+	var cellWidthSlider: some View {
+		VStack {
+			"Cell Width:".text
+			Slider(value: self.$cellWidth).padding()
+		}
+	}
+
+	var cellHeightSlider: some View {
+		VStack {
+			GeometryReader { geom in
+				Slider(value: self.$cellHeight).padding()
+					.rotationEffect(.degrees(90.0), anchor: .topLeading)
+					.frame(width: geom.size.height)
+					.offset(x: 80.0)
+			}
+			"Cell Height".text
+		}
+		.frame(width: 100)
+		.padding(EdgeInsets(top: 0, leading: 0, bottom: 80, trailing: 0))
 	}
 }
