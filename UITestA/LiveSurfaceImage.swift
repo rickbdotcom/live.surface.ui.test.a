@@ -14,7 +14,7 @@ class LiveSurfaceImage: ObservableObject, Identifiable {
 
 	let id: String
 
-	init(id: ID, with image: ImageManifest.Images.Image) {
+	init(id: ID, with image: ImageManifest.Image) {
 		self.id = id
 	}
 

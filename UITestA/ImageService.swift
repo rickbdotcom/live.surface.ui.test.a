@@ -31,7 +31,7 @@ class ImageService: ObservableObject {
 			"key": apiKey,
 			"pro": production ? "1" : "0"
 		], type: ImageManifest.self, loadingState: state) { images in
-			self.images.items = images.images.items.sorted {
+			self.images.items = images.images.sorted {
 				$0.value.index < $1.value.index
 			}.map {
 				LiveSurfaceImage(id: $0.key, with: $0.value)

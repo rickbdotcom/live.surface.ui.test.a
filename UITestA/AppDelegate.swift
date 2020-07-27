@@ -37,7 +37,7 @@ private let isProduction = true
 #endif
 
 let imageService = ImageService(
-	manifestURL: "https://www.livesurface.com/test/api/imagesstructure.php",
+	manifestURL: "https://www.livesurface.com/test/api/images.php",
 	baseImageURL: "https://www.livesurface.com/test/images/",
 	apiKey: "79319da5-8cb3-43ac-f5b0-f38a727242a8",
 	production: isProduction

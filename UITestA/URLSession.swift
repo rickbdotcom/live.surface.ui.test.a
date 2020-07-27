@@ -17,13 +17,16 @@ extension URLSession {
 			URLQueryItem(name: $0, value: $1)
 		} ?? []
 
-		let publisher = dataTaskPublisher(for: urlComps.url!).map { $0.data }
+		let requestURL = urlComps.url!
+		let publisher = dataTaskPublisher(for: requestURL).map { $0.data }
 			.decode(type: type, decoder: JSONDecoder())
 			.eraseToAnyPublisher()
 
-		getAllTasks { tasks in
-			if let task = tasks.first(where: { $0.originalRequest?.url == url }) {
-				progress?(task.progress)
+		DispatchQueue.main.async {
+			self.getAllTasks { tasks in
+				if let task = tasks.first(where: { $0.originalRequest?.url == requestURL }) {
+					progress?(task.progress)
+				}
 			}
 		}
 		return publisher
@@ -34,11 +37,15 @@ extension URLSession {
 			loadingState?.progress = $0
 		}
 		.sinkOnce(receiveCompletion: { result in
-			if case let .failure(error) = result {
-				loadingState?.error = error
+			DispatchQueue.main.async {
+				if case let .failure(error) = result {
+					loadingState?.error = error
+				}
 			}
 		}, receiveValue: { value in
-			completion(value)
+			DispatchQueue.main.async {
+				completion(value)
+			}
 		})
 	}
 }

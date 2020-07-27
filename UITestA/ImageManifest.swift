@@ -10,32 +10,28 @@ import Foundation
 
 struct ImageManifest: Decodable {
 
-	let images: Images
+	let images: [String: Image]
 
-	struct Images: Decodable {
-		let items: [String: Image]
+	struct Image: Decodable {
+		let index: Int
+		let name: String
+		let number: String
+		let image: String
+		let category: String
+		let version: String
 
-		struct Image: Decodable {
-			let index: Int
-			let name: String
-			let number: String
-			let image: String
-			let category: String
-			let version: String
+		let tags: Tags
 
-			let tags: [Tag]
-
-			struct Tag: Decodable {
-				let sizedescription: String
-				let sizescale: String
-				let sizewidth: String
-				let sizewidtharc: String
-				let sizeheight: String
-				let sizeheightarc: String
-				let sizedepth: String
-				let sizedeptharc: String
-				let sizeunits: String
-			}
+		struct Tags: Decodable {
+			let sizedescription: String
+			let sizescale: String
+			let sizewidth: String
+			let sizewidtharc: String
+			let sizeheight: String
+			let sizeheightarc: String
+			let sizedepth: String
+			let sizedeptharc: String
+			let sizeunits: String
 		}
 	}
 }
