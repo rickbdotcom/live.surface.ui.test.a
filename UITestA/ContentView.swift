@@ -16,27 +16,42 @@ struct ContentView: View {
 
 	@State private var cellWidth: CGFloat = 0.25
 	@State private var cellHeight: CGFloat = 0.25
+	@State private var editingImage: LiveSurfaceImage?
 
     var body: some View {
-		HStack {
-			VStack {
-				GeometryReader { g in
-					GridView(numberOfColumns: self.numberOfColumns(), rowHeight: self.rowHeight(from: g.size.height), data: self.images.items) {
-						self.view(for: $0)
+		ZStack {
+			HStack {
+				VStack {
+					GeometryReader { g in
+						GridView(numberOfColumns: self.numberOfColumns(), rowHeight: self.rowHeight(from: g.size.height), data: self.images.items) {
+							self.view(for: $0)
+						}
 					}
+					self.cellWidthSlider
 				}
-				self.cellWidthSlider
+				self.cellHeightSlider
 			}
-			self.cellHeightSlider
+			.defaultLoading(with: self.imageService.loadingState)
+
+			editingView
 		}
-		.defaultLoading(with: self.imageService.loadingState)
 	}
 }
 
 private extension ContentView {
 
+	var editingView: some View {
+		if let editingImage = editingImage {
+			return ImageEditView(image: editingImage).any
+		} else {
+			return EmptyView().any
+		}
+	}
+
 	func view(for image: LiveSurfaceImage) -> some View {
-		LiveSurfaceImageView(image: image)
+		LiveSurfaceImageView(image: image).onTapGesture {
+			self.editingImage = image
+		}
 	}
 
 	func numberOfColumns() -> Int {

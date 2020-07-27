@@ -8,9 +8,6 @@
 
 import SwiftUI
 
-// in iOS 14 we'd just use the new lazy grid view
-// this is buggy when changing the number of columns
-// some SwiftUI identifiable/animation voodoo
 struct GridView<Cell: View, Data: Identifiable>: View {
 
 	let numberOfColumns: Int
@@ -26,14 +23,14 @@ struct GridView<Cell: View, Data: Identifiable>: View {
 	}
 
 	var body: some View {
-		GeometryReader { geom in
+		GeometryReader { g in
 			List() {
 				ForEach(self.rows, id: \.id) { row in
 					HStack(spacing: 0) {
 						ForEach(row.columns) {
 							self.cell($0)
 								.frame(maxWidth: .infinity, maxHeight: .infinity)
-								.frame(width: geom.size.width / CGFloat(self.numberOfColumns), height: self.rowHeight)
+								.frame(width: g.size.width / CGFloat(self.numberOfColumns), height: self.rowHeight)
 						}
 					}.listRowInsets(EdgeInsets())
 				}

@@ -14,7 +14,7 @@ struct LiveSurfaceImageView: View {
 	@State private var uiImage: UIImage?
 
 	var body: some View {
-		self.imageView
+		imageView
 			.defaultLoading(with: self.image.loadingState)
 			.onAppear {
 				self.image.image(for: .zero).sinkOnce {
@@ -28,12 +28,20 @@ private extension LiveSurfaceImageView {
 
 	var imageView: some View {
 		if let uiImage = uiImage {
-			return ZStack {
-				uiImage.image.resizable().blur(radius: 20)
-				uiImage.image.resizable().aspectRatio(contentMode: .fit)
+			return GeometryReader { g in
+				ZStack {
+					uiImage.image.resizable().blur(radius: 20)
+					uiImage.image.resizable().aspectRatio(contentMode: .fit)
+					VStack(alignment: .leading) {
+						self.image.manifestImage.number.text.font(.system(size: 32))
+						self.image.manifestImage.name.text.font(.system(size: 20))
+					}
+					.opacity(0.5).padding()
+					.frame(width: g.size.width, height: g.size.height, alignment: .topLeading)
+				}
 			}.any
 		} else {
-			return EmptyView().any
+			return Color.white.any
 		}
 	}
 }
