@@ -10,7 +10,7 @@ import Foundation
 
 class ImageService: ObservableObject {
 
-	private(set) var state = LoadingState()
+	private(set) var loadingState = LoadingState()
 	private(set) var images = ObservableArray<LiveSurfaceImage>()
 
 	let manifestURL: URL
@@ -30,7 +30,7 @@ class ImageService: ObservableObject {
 		sessionManager.get(url: manifestURL, parameters: [
 			"key": apiKey,
 			"pro": production ? "1" : "0"
-		], type: ImageManifest.self, loadingState: state) { images in
+		], type: ImageManifest.self, loadingState: loadingState) { images in
 			self.images.items = images.images.sorted {
 				$0.value.index < $1.value.index
 			}.map {

@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct ContentView: View {
+
+	@EnvironmentObject var imageService: ImageService
+
 	@ObservedObject var images: ObservableArray<LiveSurfaceImage>
 
     var body: some View {
@@ -17,5 +20,6 @@ struct ContentView: View {
 		) {
 			Text($0.id)
 		}
+		.loading(with: imageService.loadingState)
 	}
 }

@@ -29,17 +29,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 }
 
-// more sophisticated scheme would use build config environment
+func isProduction() -> Bool {
 #if DEBUG
-private let isProduction = false
+	if let production = ProcessInfo.processInfo.environment["isProduction"] {
+		return production != "0"
+	}
+	return false
 #else
-private let isProduction = true
+	return true
 #endif
-
+}
 let imageService = ImageService(
 	manifestURL: "https://www.livesurface.com/test/api/images.php",
 	baseImageURL: "https://www.livesurface.com/test/images/",
 	apiKey: "79319da5-8cb3-43ac-f5b0-f38a727242a8",
-	production: isProduction
+	production: isProduction()
 )
 

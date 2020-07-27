@@ -14,6 +14,9 @@
 		0D64A5C224CE970C00AFB043 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64A5C124CE970C00AFB043 /* LoadingState.swift */; };
 		0D64A5C424CE9F6800AFB043 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64A5C324CE9F6800AFB043 /* URLSession.swift */; };
 		0D64A5C624CEA0CA00AFB043 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64A5C524CEA0CA00AFB043 /* Publisher.swift */; };
+		0D64A5CA24CEFDAE00AFB043 /* LoadingStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64A5C924CEFDAE00AFB043 /* LoadingStateView.swift */; };
+		0D64A5CE24CEFF4C00AFB043 /* SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64A5CD24CEFF4C00AFB043 /* SwiftUI.swift */; };
+		0D64A5D024CEFFA000AFB043 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64A5CF24CEFFA000AFB043 /* ProgressView.swift */; };
 		0D71E07C24CE6E6C00A1C7D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D71E07B24CE6E6C00A1C7D5 /* AppDelegate.swift */; };
 		0D71E07E24CE6E6C00A1C7D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D71E07D24CE6E6C00A1C7D5 /* SceneDelegate.swift */; };
 		0D71E08024CE6E6C00A1C7D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D71E07F24CE6E6C00A1C7D5 /* ContentView.swift */; };
@@ -31,6 +34,9 @@
 		0D64A5C124CE970C00AFB043 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
 		0D64A5C324CE9F6800AFB043 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		0D64A5C524CEA0CA00AFB043 /* Publisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
+		0D64A5C924CEFDAE00AFB043 /* LoadingStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStateView.swift; sourceTree = "<group>"; };
+		0D64A5CD24CEFF4C00AFB043 /* SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI.swift; sourceTree = "<group>"; };
+		0D64A5CF24CEFFA000AFB043 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		0D71E07824CE6E6C00A1C7D5 /* UITestA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITestA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D71E07B24CE6E6C00A1C7D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D71E07D24CE6E6C00A1C7D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,11 +85,14 @@
 				0D64A5BD24CE96CF00AFB043 /* ObservableArray.swift */,
 				0D64A5BF24CE96E400AFB043 /* LiveSurfaceImage.swift */,
 				0D64A5C124CE970C00AFB043 /* LoadingState.swift */,
+				0D64A5C924CEFDAE00AFB043 /* LoadingStateView.swift */,
+				0D64A5CF24CEFFA000AFB043 /* ProgressView.swift */,
 				0D64A5BB24CE83AC00AFB043 /* ImageManifest.swift */,
 				0D64A5C324CE9F6800AFB043 /* URLSession.swift */,
 				0D71E07F24CE6E6C00A1C7D5 /* ContentView.swift */,
 				0D71E09024CE6FD600A1C7D5 /* GridView.swift */,
 				0D64A5C524CEA0CA00AFB043 /* Publisher.swift */,
+				0D64A5CD24CEFF4C00AFB043 /* SwiftUI.swift */,
 				0D71E08F24CE6E7F00A1C7D5 /* UITestA.entitlements */,
 				0D71E08124CE6E6D00A1C7D5 /* Assets.xcassets */,
 				0D71E08624CE6E6D00A1C7D5 /* LaunchScreen.storyboard */,
@@ -175,12 +184,15 @@
 				0D64A5BC24CE83AC00AFB043 /* ImageManifest.swift in Sources */,
 				0D71E07C24CE6E6C00A1C7D5 /* AppDelegate.swift in Sources */,
 				0D64A5C424CE9F6800AFB043 /* URLSession.swift in Sources */,
+				0D64A5CA24CEFDAE00AFB043 /* LoadingStateView.swift in Sources */,
 				0D71E07E24CE6E6C00A1C7D5 /* SceneDelegate.swift in Sources */,
 				0D71E09124CE6FD600A1C7D5 /* GridView.swift in Sources */,
 				0D64A5BE24CE96CF00AFB043 /* ObservableArray.swift in Sources */,
 				0D64A5C024CE96E400AFB043 /* LiveSurfaceImage.swift in Sources */,
 				0D64A5C224CE970C00AFB043 /* LoadingState.swift in Sources */,
+				0D64A5CE24CEFF4C00AFB043 /* SwiftUI.swift in Sources */,
 				0D64A5BA24CE826900AFB043 /* ImageService.swift in Sources */,
+				0D64A5D024CEFFA000AFB043 /* ProgressView.swift in Sources */,
 				0D64A5C624CEA0CA00AFB043 /* Publisher.swift in Sources */,
 				0D71E08024CE6E6C00A1C7D5 /* ContentView.swift in Sources */,
 			);
