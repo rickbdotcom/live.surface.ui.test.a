@@ -12,7 +12,7 @@ struct LiveSurfaceImageView: View {
 
 	@ObservedObject var image: LiveSurfaceImage
 	@State private var uiImage: UIImage?
-
+	
 	var body: some View {
 		imageView
 			.defaultLoading(with: self.image.loadingState)

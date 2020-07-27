@@ -11,27 +11,44 @@ import SwiftUI
 struct ImageEditView: View {
 
 	@ObservedObject var image: LiveSurfaceImage
-	@State private var uiImage: UIImage?
+	@Binding var isPresented: Bool
 
 	var body: some View {
-		editingView
-			.onReceive(image.image(for: .zero).replaceError(with: UIImage())) { image in
-				if self.uiImage == nil {
-					self.uiImage = image
-				}
-			}
+		LiveSurfaceImageView(image: image)
+			.overlay(editControls)
 	}
 }
 
+
 private extension ImageEditView {
 
-	var editingView: some View {
-		guard let uiImage = uiImage else {
-			return EmptyView().any
+	var editControls: some View {
+		GeometryReader { g in
+			VStack(spacing: 30) {
+				"Flip Horizontal".text.font(.system(size: 48)).contentShape(Rectangle()).onTapGesture {
+					self.image.apply(operation: .flipHorizontal)
+				}
+				"Flip Vertical".text.font(.system(size: 48)).contentShape(Rectangle()).onTapGesture {
+					self.image.apply(operation: .flipVertical)
+				}
+				"Rotate Right".text.font(.system(size: 48)).contentShape(Rectangle()).onTapGesture {
+					self.image.apply(operation: .rotateClockwise)
+				}
+				"Rotate Left".text.font(.system(size: 48)).contentShape(Rectangle()).onTapGesture {
+					self.image.apply(operation: .rotateClockwise)
+				}
+				"Undo".text.font(.system(size: 48)).contentShape(Rectangle()).onTapGesture {
+					self.image.undoOperation()
+				}
+				"Done".text.font(.system(size: 48)).contentShape(Rectangle()).onTapGesture {
+					self.isPresented = false
+				}
+			}
+			.frame(maxHeight: .infinity, alignment: .trailing)
+			.padding()
+			.background(Color.white)
+			.opacity(0.5)
+			.frame(width: g.size.width, alignment: .trailing)
 		}
-		return ZStack {
-			uiImage.image.resizable().blur(radius: 20)
-			uiImage.image.resizable().aspectRatio(contentMode: .fit)
-		}.any
 	}
 }

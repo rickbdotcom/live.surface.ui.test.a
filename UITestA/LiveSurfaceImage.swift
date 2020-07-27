@@ -12,6 +12,11 @@ import UIKit
 
 class LiveSurfaceImage: ObservableObject, Identifiable {
 	@Published private(set) var loadingState = LoadingState()
+	@Published private(set) var operations = [ImageOperation]() {
+		didSet {
+
+		}
+	}
 
 	let id: String
 	let manifestImage: ImageManifest.Image
@@ -27,5 +32,13 @@ class LiveSurfaceImage: ObservableObject, Identifiable {
 
 	func image(for size: CGSize) -> AnyPublisher<UIImage, Error> {
 		imageService.image(named: manifestImage.image, for: size, loadingState: loadingState)
+	}
+
+	func apply(operation: ImageOperation) {
+		operations.append(operation)
+	}
+
+	func undoOperation() {
+		operations.removeLast()
 	}
 }

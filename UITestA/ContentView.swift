@@ -42,7 +42,13 @@ private extension ContentView {
 
 	var editingView: some View {
 		if let editingImage = editingImage {
-			return ImageEditView(image: editingImage).any
+			return ImageEditView(image: editingImage, isPresented: Binding(get: {
+				self.editingImage != nil
+			}, set: { value in
+				if value == false {
+					self.editingImage = nil
+				}
+			})).any
 		} else {
 			return EmptyView().any
 		}

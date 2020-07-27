@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0D14EFFE24CF6E300087DF66 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D14EFFD24CF6E300087DF66 /* ActivityIndicatorView.swift */; };
 		0D14F00024CF839E0087DF66 /* ImageEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D14EFFF24CF839E0087DF66 /* ImageEditView.swift */; };
+		0D14F00224CF8A380087DF66 /* ImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D14F00124CF8A380087DF66 /* ImageOperation.swift */; };
 		0D64A5BA24CE826900AFB043 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64A5B924CE826900AFB043 /* ImageService.swift */; };
 		0D64A5BC24CE83AC00AFB043 /* ImageManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64A5BB24CE83AC00AFB043 /* ImageManifest.swift */; };
 		0D64A5BE24CE96CF00AFB043 /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64A5BD24CE96CF00AFB043 /* ObservableArray.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		0D14EFFD24CF6E300087DF66 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		0D14EFFF24CF839E0087DF66 /* ImageEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditView.swift; sourceTree = "<group>"; };
+		0D14F00124CF8A380087DF66 /* ImageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOperation.swift; sourceTree = "<group>"; };
 		0D64A5B924CE826900AFB043 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		0D64A5BB24CE83AC00AFB043 /* ImageManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManifest.swift; sourceTree = "<group>"; };
 		0D64A5BD24CE96CF00AFB043 /* ObservableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableArray.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				0D64A5B924CE826900AFB043 /* ImageService.swift */,
 				0D64A5BD24CE96CF00AFB043 /* ObservableArray.swift */,
 				0D64A5BF24CE96E400AFB043 /* LiveSurfaceImage.swift */,
+				0D14F00124CF8A380087DF66 /* ImageOperation.swift */,
 				0DF14EEF24CF41BA00C8821D /* LiveSurfaceImageView.swift */,
 				0D14EFFF24CF839E0087DF66 /* ImageEditView.swift */,
 				0D64A5C124CE970C00AFB043 /* LoadingState.swift */,
@@ -197,6 +200,7 @@
 				0D64A5CA24CEFDAE00AFB043 /* LoadingStateView.swift in Sources */,
 				0D71E07E24CE6E6C00A1C7D5 /* SceneDelegate.swift in Sources */,
 				0D71E09124CE6FD600A1C7D5 /* GridView.swift in Sources */,
+				0D14F00224CF8A380087DF66 /* ImageOperation.swift in Sources */,
 				0D64A5BE24CE96CF00AFB043 /* ObservableArray.swift in Sources */,
 				0D64A5C024CE96E400AFB043 /* LiveSurfaceImage.swift in Sources */,
 				0D14F00024CF839E0087DF66 /* ImageEditView.swift in Sources */,
