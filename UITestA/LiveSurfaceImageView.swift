@@ -31,7 +31,7 @@ private extension LiveSurfaceImageView {
 			return GeometryReader { g in
 				ZStack {
 					uiImage.image.resizable().blur(radius: 20)
-					uiImage.image.resizable().aspectRatio(contentMode: .fit)
+					uiImage.image.resizable().aspectRatio(contentMode: .fit).modify(with: self.image.operations)
 					VStack(alignment: .leading) {
 						self.image.manifestImage.number.text.font(.system(size: 32))
 						self.image.manifestImage.name.text.font(.system(size: 20))

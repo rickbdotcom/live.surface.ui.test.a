@@ -14,8 +14,10 @@ struct ImageEditView: View {
 	@Binding var isPresented: Bool
 
 	var body: some View {
-		LiveSurfaceImageView(image: image)
-			.overlay(editControls)
+		ZStack {
+			LiveSurfaceImageView(image: image)
+		}
+		.overlay(editControls)
 	}
 }
 
@@ -35,7 +37,7 @@ private extension ImageEditView {
 					self.image.apply(operation: .rotateClockwise)
 				}
 				"Rotate Left".text.font(.system(size: 48)).contentShape(Rectangle()).onTapGesture {
-					self.image.apply(operation: .rotateClockwise)
+					self.image.apply(operation: .rotateCounterClockwise)
 				}
 				"Undo".text.font(.system(size: 48)).contentShape(Rectangle()).onTapGesture {
 					self.image.undoOperation()
@@ -49,6 +51,6 @@ private extension ImageEditView {
 			.background(Color.white)
 			.opacity(0.5)
 			.frame(width: g.size.width, alignment: .trailing)
-		}
+		}.zIndex(1)
 	}
 }

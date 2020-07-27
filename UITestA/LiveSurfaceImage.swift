@@ -12,11 +12,7 @@ import UIKit
 
 class LiveSurfaceImage: ObservableObject, Identifiable {
 	@Published private(set) var loadingState = LoadingState()
-	@Published private(set) var operations = [ImageOperation]() {
-		didSet {
-
-		}
-	}
+	@Published private(set) var operations = [ImageOperation]()
 
 	let id: String
 	let manifestImage: ImageManifest.Image
@@ -39,6 +35,8 @@ class LiveSurfaceImage: ObservableObject, Identifiable {
 	}
 
 	func undoOperation() {
-		operations.removeLast()
+		if operations.isEmpty == false {
+			operations.removeLast()
+		}
 	}
 }

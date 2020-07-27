@@ -18,13 +18,13 @@ enum ImageOperation: String, Codable {
 	func modify<T: View>(_ view: T) -> AnyView {
 		switch self {
 		case .flipHorizontal:
-			return view.transformEffect(.init(scaleX: -1, y: 1)).any
+			return view.rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0)).any
 		case .flipVertical:
-			return view.transformEffect(.init(scaleX: 1, y: -1)).any
+			return view.rotation3DEffect(.degrees(180), axis: (x: 1, y: 0, z: 0)).any
 		case .rotateClockwise:
-			return view.rotationEffect(.degrees(90)).any
+			return view.rotation3DEffect(.degrees(90), axis: (x: 0, y: 0, z: 1)).any
 		case .rotateCounterClockwise:
-			return view.rotationEffect(.degrees(-90)).any
+			return view.rotation3DEffect(.degrees(-90), axis: (x: 0, y: 0, z: 1)).any
 		}
 	}
 }
