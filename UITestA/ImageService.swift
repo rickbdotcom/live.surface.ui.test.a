@@ -58,9 +58,12 @@ class ImageService: ObservableObject {
 
 		return sessionManager.dataTaskPublisher(for: url(for: name, size: size)) {
 			loadingState?.progress = $0
-		}.compactMap {
+		}.compactMap { [weak self] in
 			if let image = UIImage(data: $0.data) {
-				self.cache(data: $0.data, name: name, size: size)
+				if let self = self {
+					self.writeToDiskCache(data: $0.data, name: name, size: size)
+					self.cache.setObject(image, forKey: self.cacheKey(for: name, size: size) as NSString)
+				}
 				return image
 			} else {
 				return nil
@@ -95,7 +98,7 @@ private extension ImageService {
 		FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(name).appendingPathExtension("json")
 	}
 
-	func cache(data: Data, name: String, size: CGSize) {
+	func writeToDiskCache(data: Data, name: String, size: CGSize) {
 		let localUrl = self.localUrl(for: name, size: size)
 		try? data.write(to: localUrl)
 	}
